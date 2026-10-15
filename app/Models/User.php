@@ -7,6 +7,7 @@ use App\Traits\IsActive;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,11 @@ class User extends Authenticatable
     public function hobbies(): HasMany
     {
         return $this->hasMany(Hobbies::class);
+    }
+
+    public function scopeSearchName(Builder $query, ?string $search): Builder
+    {
+        return $query->when($search, fn ($q, $s) => $q->where('name', 'ilike', "%{$s}%"));
     }
 
 }
