@@ -19,7 +19,7 @@ class UpdateUserRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $hobbies = collect($this->input('hobbies', []))
-            ->filter(fn ($h) => is_array($h) && filled($h['name'] ?? null))
+            ->filter(fn ($hobby) => is_array($hobby) && filled($hobby['name'] ?? null))
             ->values()
             ->all();
 
@@ -44,6 +44,14 @@ class UpdateUserRequest extends FormRequest
             'hobbies' => ['nullable', 'array'],
             'hobbies.*.id' => ['nullable', 'integer'],
             'hobbies.*.name' => ['required', 'regex:/^[a-zA-Z\s]+$/u', 'max:100'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nama',
+            'hobbies.*.name' => 'nama hobi',
         ];
     }
 }

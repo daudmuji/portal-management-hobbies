@@ -10,6 +10,8 @@ class Hobbies extends Model
 
     use IsActive;
 
+    protected $table = 'tbl_hobbies';
+
     protected $guarded = ['id'];
 
     public function user()
