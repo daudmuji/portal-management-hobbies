@@ -17,14 +17,14 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label">Nama</label>
+                    <label class="form-label">Nama <span class="text-danger">*</span></label>
                     <input type="text" name="name" value="{{ old('name', $user->name) }}"
                            class="form-control @error('name') is-invalid @enderror" required>
                     @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
+                    <label class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" name="email" value="{{ old('email', $user->email) }}"
                            class="form-control @error('email') is-invalid @enderror" autocomplete="off" required>
                     @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Hobi</label>
+                    <label class="form-label">Hobi <span class="text-danger">*</span></label>
 
                     <div id="hobby-list">
                         @foreach ($hobbies as $i => $hobby)

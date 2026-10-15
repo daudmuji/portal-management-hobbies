@@ -37,9 +37,21 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'regex:/^[a-zA-Z\s]+$/u', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'hobbies' => ['nullable', 'array'],
+            'hobbies' => ['required', 'array', 'min:1'],
             'hobbies.*.id' => ['nullable', 'integer'],
             'hobbies.*.name' => ['required', 'regex:/^[a-zA-Z\s]+$/u', 'max:100'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'hobbies.required' => 'Hobi wajib diisi minimal satu',
+            'hobbies.array' => 'Format hobi tidak valid',
+            'hobbies.min' => 'Hobi wajib diisi minimal satu',
+            'hobbies.*.name.required' => 'Nama hobi wajib diisi',
+            'hobbies.*.name.regex' => 'Nama hobi hanya boleh berisi huruf',
+            'hobbies.*.name.max' => 'Nama hobi maksimal 100 karakter',
         ];
     }
 }
